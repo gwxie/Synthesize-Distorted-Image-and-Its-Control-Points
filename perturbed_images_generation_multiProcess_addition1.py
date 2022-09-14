@@ -650,11 +650,21 @@ class perturbed(utils.BasePerturbed):
 		# cv2.remap(self.synthesis_perturbed_color[:, :, :3], self.forward_mapping[:, :, 1], self.forward_mapping[:, :, 0], cv2.INTER_LINEAR, flat_img)
 		# cv2.imwrite(self.save_path + 'outputs/1.jpg', flat_img)
 		'''forward-end'''
+		
+		'''image and label
 		synthesis_perturbed_data = {
 			'fiducial_points': fiducial_points_coordinate,
 			'segment': np.array((segment_x, segment_y))
 		}
 		cv2.imwrite(self.save_path + 'png/' + perfix_ + '_' + fold_curve + '.png', self.synthesis_perturbed_color[:, :, :3])
+		'''
+		'''or'''
+		synthesis_perturbed_data = {
+			'image':self.synthesis_perturbed_color[:, :, :3],
+			'fiducial_points': fiducial_points_coordinate,
+			'segment': np.array((segment_x, segment_y))
+		}
+		
 		with open(self.save_path+'color/'+perfix_+'_'+fold_curve+'.gw', 'wb') as f:
 			pickle_perturbed_data = pickle.dumps(synthesis_perturbed_data)
 			f.write(pickle_perturbed_data)
